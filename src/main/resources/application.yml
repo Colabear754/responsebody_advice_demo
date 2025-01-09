@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: responsebody_advice_demo
