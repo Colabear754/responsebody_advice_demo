@@ -4,5 +4,6 @@ enum class ResponseCode(
     val message: String
 ) {
     SUCCESS("성공"),
-    ERROR01("사용자 정보를 찾을 수 없습니다."),
+    ERROR01("잘못된 요청"),
+    ERROR99("알 수 없는 오류")
 }
