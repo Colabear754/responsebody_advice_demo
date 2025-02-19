@@ -23,7 +23,7 @@ class CommonResponseAdvice : ResponseBodyAdvice<Any?> {
         selectedConverterType: Class<out HttpMessageConverter<*>>,
         request: ServerHttpRequest,
         response: ServerHttpResponse
-    ): Any {
+    ): Any? {
         return CommonResponse(ResponseCode.SUCCESS, body)
     }
 }
