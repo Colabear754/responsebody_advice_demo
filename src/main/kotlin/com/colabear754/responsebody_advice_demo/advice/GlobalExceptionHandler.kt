@@ -14,7 +14,8 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception::class)
-    fun handleException(): ResponseEntity<CommonResponse<*>> {
+    fun handleException(e: Exception): ResponseEntity<CommonResponse<*>> {
+        e.printStackTrace()
         return ResponseEntity.internalServerError().body(CommonResponse(ResponseCode.ERROR99, null))
     }
 }
