@@ -10,7 +10,7 @@ import org.springframework.http.server.ServerHttpResponse
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice
 
-@RestControllerAdvice()
+@RestControllerAdvice(basePackages = ["com.colabear754.responsebody_advice_demo.controller"])
 class CommonResponseAdvice : ResponseBodyAdvice<Any?> {
     override fun supports(returnType: MethodParameter, converterType: Class<out HttpMessageConverter<*>>): Boolean {
         return true
@@ -24,6 +24,10 @@ class CommonResponseAdvice : ResponseBodyAdvice<Any?> {
         request: ServerHttpRequest,
         response: ServerHttpResponse
     ): Any? {
-        return CommonResponse(ResponseCode.SUCCESS, body)
+        return if (body?.javaClass != CommonResponse::class.java) {
+            CommonResponse(ResponseCode.SUCCESS, body)
+        } else {
+            body
+        }
     }
 }
