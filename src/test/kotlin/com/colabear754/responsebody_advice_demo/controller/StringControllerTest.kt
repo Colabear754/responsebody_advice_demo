@@ -15,9 +15,7 @@ class StringControllerTest @Autowired constructor(
         mockMvc.get("/string")
             .andExpect {
                 status { isOk() }
-                jsonPath("$.code") { value("SUCCESS") }
-                jsonPath("$.message") { value("성공") }
-                jsonPath("$.data") { value("Hello, World!") }
+                content { string("Hello, World!") }
             }
     }
 }
