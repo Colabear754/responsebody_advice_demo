@@ -1,11 +1,14 @@
 package com.colabear754.responsebody_advice_demo.controller
 
+import com.colabear754.responsebody_advice_demo.config.HandlerAdapterPostProcessor
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.context.annotation.Import
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 
+@Import(HandlerAdapterPostProcessor::class)
 @WebMvcTest
 class StringControllerTest @Autowired constructor(
     private val mockMvc: MockMvc
@@ -15,7 +18,9 @@ class StringControllerTest @Autowired constructor(
         mockMvc.get("/string")
             .andExpect {
                 status { isOk() }
-                content { string("Hello, World!") }
+                jsonPath("$.code") { value("SUCCESS") }
+                jsonPath("$.message") { value("성공") }
+                jsonPath("$.data") { value("Hello, World!") }
             }
     }
 }
